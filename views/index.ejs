@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>iTunes API Client</title>
+  </head>
+  <body>
+    <header>
+      <form class="search" action="/search" method="post">
+        <input type="text" name="term" value="">
+        <input type="submit" value="Search">
+      </form>
+    </header>
+    <div class="wrapper">
+      <div class="container">
+        <h3>Favorites</h3>
+        <ul class="favorites">
+          <% for(let i = 0; i < favorites.length; i++){ %>
+            <li class="item">
+              <img src="<%= favorites[i].artworkUrl100 %>" alt="" />
+              <h4><%= favorites[i].collectionName %></h4>
+              <form class="" action="favorites/<%= favorites[i]._id %>?_method=DELETE" method="post">
+                <input type="submit" name="name" value="Delete">
+              </form>
+            </li>
+          <% }; %>
+        </ul>
+      </div>
+      <div class="container">
+        <h3>Results</h3>
+        <ul class="results">
+          <% for(let i = 0; i < results.length; i++){ %>
+            <li class="item">
+              <img src="<%= results[i].artworkUrl100 %>" alt="" />
+              <h4><%= results[i].collectionName %></h4>
+              <form class="save" action="/favorites" method="post">
+                <input type="hidden" name="favorite[collectionName]" value="<%= results[i].collectionName  %>">
+                <input type="hidden" name="favorite[artworkUrl100]" value="<%= results[i].artworkUrl100 %>">
+                <input type="submit" name="name" value="Save">
+              </form>
+            </li>
+          <% }; %>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>
